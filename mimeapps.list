@@ -1,2 +1,3 @@
 [Added Associations]
-application/x-shellscript=org.gnome.gedit.desktop;
+application/x-shellscript=geany.desktop;
+text/x-matlab=geany.desktop;

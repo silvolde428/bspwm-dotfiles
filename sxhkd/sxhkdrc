@@ -4,14 +4,29 @@
 
 # terminal emulator
 super + Return
-        alacritty
+	alacritty
 
 # program launcher
 super + r
-	rofi -terminal alacritty -show drun
-	
-ctrl + t
-       thunar
+	rofi -modi drun -show drun -line-padding 4 \
+                -columns 2 -padding 50 -hide-scrollbar -terminal xfce4-terminal \
+                -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
+
+# show open window
+super + ctrl + d
+	rofi -modi drun -show window -line-padding 4 \
+                -columns 2 -padding 50 -hide-scrollbar -terminal xfce4-terminal \
+                -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
+
+# show ssh sesssions
+super + shift + d
+	rofi -modi drun -show ssh -line-padding 4 \
+                -columns 2 -padding 50 -hide-scrollbar -terminal xfce4-terminal \
+                -show-icons -drun-icon-theme "Arc-X-D" -font "Droid Sans Regular 10"
+                
+# power-menu 
+super + shift + e
+     ~/.config/rofi/powermenu.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -20,15 +35,13 @@ super + Escape
 #
 # bspwm hotkeys
 #
-ctrl + n
-       nautilus
-       
+
 # quit/restart bspwm
 super + alt + {q,r}
 	bspc {quit,wm -r}
 
 # close and kill
-super + {_,shift + }w
+super + {_,shift + }q
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
@@ -124,5 +137,58 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+#
+# Special hotkeys
+#
+
+# Multimedia keys
+XF86AudioRaiseVolume
+  amixer -q set Master 5%+ unmute
+
+# Still multimedia
+XF86AudioLowerVolume
+  amixer -q set Master 5%- unmute
+
+# still
+XF86AudioMute
+  amixer -D pulse sset Master toggle-mute
+  
+# amixer -q set Master toggle
+# Simple amixer command seems to have problems unmuting device
+
+# Brightness up
+XF86MonBrightnessUp
+  xbacklight -inc 5
+
+# And brightness down
+XF86MonBrightnessDown
+  xbacklight -dec 5
+
+# Screenshot
+Print
+  scrot ~/Pictures/Screenshot-$(date +%F_%T).png
+
+super + Print
+  ~/.config/bspwm/scripts/screenshot.sh
+
+# Shortcuts
 ctrl + b
-       firefox
+  firefox
+
+super + v
+  code
+
+ctrl + t
+   thunar
+
+super + u
+  jellyfinmediaplayer
+
+super + F3
+ ~/.custom/brightness10.sh
+
+super + F4
+ ~/.custom/brightness100.sh
+
+super + F1
+  ~/.config/bspwm/scripts/keybindings_rofi.sh

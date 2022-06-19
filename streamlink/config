@@ -1,0 +1,3 @@
+player=mpv --cache=yes --demuxer-max-bytes=2048
+title="{author} - {title}"
+player-no-close
